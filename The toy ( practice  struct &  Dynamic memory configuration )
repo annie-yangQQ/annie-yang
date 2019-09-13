@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+struct node{
+    int val;
+    struct node *next;
+};
+
+
+int main(){
+
+  int team,toy,day; //declare toy,team,day
+  int i; // declare i as for_loop 's variable
+  printf("please input team & toy & day\n");  
+  scanf("%d%d%d",&team,&toy,&day);
+
+  int toy_day,toy_level;
+  struct node **combination=(struct node **)calloc(sizeof(struct node),day); /*Useing  calloc  can create new memory space and 
+  struct node *p;                                                               make  all value store zero */                                                                                                                                                  
+  struct node *p2;
+
+  printf("please input favorite level (1~10) & team number( At least a toy every team)\n"); 
+  for(i=0;i<toy;++i){
+    printf("%d=>",i+1);
+    scanf("%d%d",&toy_level,&toy_day);
+    printf("\n");
+    p2=combination[toy_day-1];
+    p=(struct node *)malloc(sizeof(struct node));
+    p->val=toy_level;
+    p->next=p2;
+    combination[toy_day-1]=p;
+  }
+
+/*-------------------------------------------------------------------------------------------*/
+
+  int **choose=(int **)malloc(sizeof(int)*day);  
+
+   printf("please input two team \n");
+   for(i=0;i<day;++i){
+    choose[i]=(int*)malloc(sizeof(int)*2);
+    printf("%d=>",i+1);
+    scanf("%d%d",&choose[i][0],&choose[i][1]);  /* select  two of days*/ 
+    printf("\n");
+  }
+
+/*------------------------------------------------------------------------------------------*/
+
+  int sum;
+
+  printf("The result:\n");
+  printf("--------------------------------------------");
+  for(i=0;i<day;++i){
+    p=combination[choose[i][0]-1];
+    sum=0;
+    do{
+      p2=combination[choose[i][1]-1];
+        do{
+          if(p->val < p2->val)  sum+=p->val; else sum+=p2->val;
+           p2=p2->next;
+        }while(p2!=NULL);
+        p=p->next;
+    }while(p!=NULL);
+       printf("%d day=>%d\n",i+1,sum);
+
+  }
+
+   return 0;
+}
