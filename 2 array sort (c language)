@@ -16,8 +16,7 @@ output:
 */
 
 
-
- void insert_sort(int *a,int start,int end,int width){   /*Insertion Sort*/
+void insert_sort(int *a,int start,int end,int width){   /*Insertion Sort*/
      int j,z;
      int temp;
      for(j=start;j< end;++j){  
@@ -73,7 +72,6 @@ int temp;
     }
      printf("\n");
   }
-
 
 
 
