@@ -1,0 +1,118 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include <string.h>
+#include <time.h>
+
+struct node{
+     int Data;
+     struct node *left;
+     struct node *right;
+};
+
+
+typedef struct node  bnode;
+typedef bnode *bbnode;
+
+
+bbnode add_tree(bbnode *root,int val);
+void preorder(bbnode *root);
+void inorder(bbnode *root);
+void postorder(bbnode *root);
+void create_data(int *data);
+void showdata(int *data);
+
+
+bbnode add_tree(bbnode *root,int val){ /* create binary tree node*/
+   bbnode newnode;
+   if((*root)==NULL){
+      (*root)=(bbnode)malloc(sizeof(bnode));
+      (*root)->Data=val;
+      (*root)->left=NULL;
+      (*root)->right=NULL;
+    }else if((*root)->Data >val){
+         return add_tree(&((*root)->left),val);
+    }else{
+         return add_tree(&((*root)->right),val);
+   }
+       return (*root);
+}
+
+
+void preorder(bbnode *root){
+    if((*root)!=NULL){
+      printf("%d\t",(*root)->Data);
+      inorder(&(*root)->left);
+      inorder(&(*root)->right);
+
+    }
+
+}
+
+void inorder(bbnode *root){
+    if((*root)!=NULL){
+      inorder(&(*root)->left);
+      printf("%d\t",(*root)->Data);
+      inorder(&(*root)->right);
+
+    }
+
+}
+void postorder(bbnode *root){
+    if((*root)!=NULL){
+      inorder(&(*root)->left);
+      inorder(&(*root)->right);
+      printf("%d\t",(*root)->Data);
+    }
+
+}
+
+void showdata(int *data){
+        int i;
+        for(i=0;i<10;++i){
+           printf("%d\t",data[i]);
+        }
+        printf("\n");
+       return;
+
+}
+
+
+void create_data(int *data){
+
+     srand(time(NULL));
+
+    for(int i=0;i<10;++i){
+        int val=data[i]=rand()%101;
+        data[i]=val;
+    }
+
+     return;
+}
+
+
+int main(){
+   bbnode root=NULL;
+   bbnode p2;
+   int val[10],val2;
+   int count=0;
+
+    create_data(val);
+
+   for(int i=0;i<10;++i){
+     count++;
+     p2=add_tree(&root,val[i]);
+   }
+   printf("initiate data[10]:");
+   showdata(val);
+   printf("preorder :\t");
+   preorder(&root);
+   printf("\n");
+    printf("inorder :\t");
+   inorder(&root);
+   printf("\n");
+   printf("postorder :\t");
+   postorder(&root);
+  
+   return 0;
+
+}
