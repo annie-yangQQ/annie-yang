@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*Here saves diverse sorting algorithem and uses C language to show you!!!*/
+
 void bubble_sort(int *val,int numSize);
 void selection_sort1(int *val,int numSize);
 void insert_sort(int *val,int numSize);
