@@ -1,0 +1,45 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+/*----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Editor : Annie-yang
+ Program purpose : making a simulation of stack
+ Complete time : 2019/04/30
+  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+int main(){
+   int stack1[5]={0},total_space=5,value=0;  //declare stack1 ,total_space ,value.
+   int move=0;                               //declare move
+   char selection[11]="\0";                  //declare selection       
+
+   do{
+     printf("--------------------------------------------------------------------\n\n\n");
+     for(int i=0;i<5;++i){
+         printf("%d\t",stack1[i]);          //Display the value of all space currently.  
+     }
+     printf("move=%d\n\n",move);            //Display the value of move currently and represent stack_top position currently.
+     printf("\n\nThere are %d spaces. please input \"pop or push or stack_top\"\n",total_space); //total_space shows empty space currently. 
+     printf("\(If you want to quit here ,please input \"quit\"\).\n");
+     printf("Your selection : ");
+     scanf("%s",selection);                 
+         if(strcmp(selection,"push")==0){   //If selection is equal with "push", the program will execute the following of parentheses,or the program skip the paragraph.  
+             if(move<5){                  //move can't over five.  
+                printf("the value: ");
+                scanf("%d",&value);       
+                stack1[move++]=value;      //stack[move] stores value,then move plus one .
+                --total_space;             //Indicate empty space will reduce. 
+                value=0;                 //Clear value.
+             }else printf("\nThe stack1 is full, please release some space.\n");  //if move over five , it shows this message .
+         }else if(strcmp(selection,"pop")==0){  //if selection is equal with "pop", the program will execute the following of parentheses,or the program skip the paragraph.
+             if(move>0){                      //move is not less than 0.
+               stack1[--move]=0;            //stack[move] stores 0,then move minus  one .
+               ++total_space;
+               printf("\n\nDelete successfully!!!\n");
+             }else printf("\nstack1 is empty,please input value.\n");//If move is less than 0 , it shows this message .
+         }else if(strcmp(selection,"stack_top")==0){
+              printf("\n\nThe  top  of stack is  %d\n\n",stack1[move-1]); // Show the top of space value.
+         }else if(strcmp(selection,"quit")!=0){   // If selection is different with "push"or"pop"or"stack_top"or"quit", it will show the following of message.
+                printf("\ninput error !!!!\n"); 
+         }
+   }while(strcmp(selection,"quit")!=0); //If selection is equal with "quit",the program will end . 
+
+     return 0;
